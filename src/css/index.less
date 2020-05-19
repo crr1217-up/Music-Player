@@ -1,0 +1,166 @@
+*{
+    margin:0;
+    padding:0;
+    overflow: hidden;
+}
+body{
+    background-size: cover;
+}
+
+.container{
+    width:100vw;
+    height:100vh;
+    // background-color:#cccccc;
+    padding-top:15vw;
+    position: relative;
+    
+    .pic{
+        width:70vw;
+        height:70vw;
+        border-radius: 50%;
+        margin:0 auto;
+        background-color: #000;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        img{
+            width:80%;
+            height:80%;
+            border-radius: 50%;
+        }
+    }
+    .info{
+        text-align: center;
+        color: #fff;
+        h2{
+            font-weight: normal;
+            margin: 3vw 0;
+        }
+        p{
+            margin:1vw;
+            font-size: 14px;
+        }
+    }
+    .progress{
+        display: flex;
+        margin-top: 8vw;
+        width: 100vw;
+        color:#fff;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+        text-align: center;
+        line-height: 8vw;
+        height:8vw;
+
+        .nowTime{
+            padding:0 4vw;
+        }
+        .bar{
+            position: relative;
+            flex:1 1 auto;
+            height:8vw;
+            line-height: 8vw;
+            .allPlay{
+                position: absolute;
+                left:0;
+                top:50%;
+                margin-top: -1px;
+                margin-bottom: 0;
+                width:100%;
+                height:2px;
+                background-color: rgba(255,255,255,.3);
+            }
+            .controlDot{
+                position: absolute;
+                width:2vw;
+                height:2vw;
+                background-color: #fff;
+                border-radius: 50%;
+                border:2vw solid rgba(0,255,255,0);
+                left:-2vw;
+                top:calc(50% - 3vw);
+                background-clip: padding-box;
+                z-index: 3;
+            }
+            .nowPlay{
+                position: absolute;
+                left:0;
+                top:0;
+                width:0;
+                height:100%;
+                background-color: #fff;
+            }
+        }
+        .allTime{
+            padding:0 4vw;
+        }
+    }
+    .bottomMenu{
+        position: fixed;
+        bottom:0;
+        left:0;
+        height:16vw;
+        display:flex;
+        width:100vw;
+        color:#fff;
+        background-color: rgba(0,0,0,.5);
+        div{
+            width:20%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 30%;
+        }
+        .like{
+            background-image: url(../images/icon-like.png);
+            // background: url(../images/icon-like.png) no-repeat center/30%;
+            &.liking{
+                background-image: url(../images/icon-like-solid.png);
+            }
+        }
+        .prev{
+            background-image: url(../images/icon-prev.png);
+        }
+        .play{
+            background-image: url(../images/icon-play.png);
+            &.playing{
+                background-image: url(../images/icon-pause.png);
+            }
+        }
+        .next{
+            background-image: url(../images/icon-next.png);
+        }
+        .playlist{
+            background-image: url(../images/icon-playlist.png);
+        }
+    }
+    .playMenu{
+        position: fixed;
+        z-index: 5;
+        left:0;
+        width:100vw;
+        margin:0;
+        bottom:0;
+        transform:translateY(265px);
+        background: linear-gradient(rgb(5,5,5),rgba(170,170,170,.95));
+        dt,dd,.close{
+            height: 12vw;
+            line-height: 12vw;
+            font-size: 16px;
+            color: #fff;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+        dt,.close{
+            text-align: center;
+        }
+        dd{
+            padding:0 4vw;
+            &.active{
+                color: #56b287;
+            }
+        }
+        .close{
+            border-bottom: none;
+        }
+    }
+}
