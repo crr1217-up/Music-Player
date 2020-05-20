@@ -1,1 +1,1 @@
-window.player||(window.player={});
+!function(i){function t(i){this.audio=new Audio,this.status="pause"}t.prototype={load:function(i){this.audio.src=i,this.audio.load()},play:function(){this.audio.play(),this.status="playing"},pause:function(){this.audio.pause(),this.status="pause"}},i.audio=new t}(window.player||(window.player={}));
