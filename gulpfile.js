@@ -31,7 +31,7 @@ function css(cb) {
 
 function js(cb) {
     return src(fileL.src + "js/*")
-			// .pipe(stripDebug())
+			.pipe(stripDebug())
 			.pipe(uglifyJs())
 			.pipe(dest(fileL.dist + "js"))
 			.pipe(connect.reload());
