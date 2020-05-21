@@ -5,7 +5,6 @@
         this.len = len;
     }
     Index.prototype = {
-       
             //这个方法用来取上一个索引（上一首）
         prev:function() {
             return this.get(-1);    //切到上一首

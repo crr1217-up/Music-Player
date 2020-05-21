@@ -18,7 +18,7 @@
             this.close.innerText = "关闭";
             this.data.forEach(function (item, i) {
                 self.dd = document.createElement("dd");
-                i == 0 ? self.dd.className = "active" : "";
+                i == 0 ? self.dd.className = "active" : "";//默认给第一个选项选中状态
                 self.dd.innerText = item.name;
                 self.playMenu.appendChild(self.dd);
                 self.menuList.push(self.dd);
