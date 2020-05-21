@@ -78,28 +78,38 @@
 	}
 
 	//1、增加了第二个参数
-	function blurImg(src, ele) {
-		var canvas = document.createElement('canvas');
-		ele=ele||document.body;
-		
-		//2、这两个值越小，图片就会越模糊
-		canvas.width=100;
-		canvas.height=100;
+	function blurImg(src, ele = document.body) {
+		var canvas = document.createElement("canvas");
+		// ele = ele || document.body;
 
-		var context = canvas.getContext('2d');
+		//2、这两个值越小，图片就会越模糊
+		canvas.width = 100;
+		canvas.height = 100;
+
+		var context = canvas.getContext("2d");
 
 		//3、把img对象放到了这里
 		var img = new Image();
 		img.src = src;
 		img.onload = function () {
-			context.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
-			var imgData=context.getImageData(0, 0, canvas.width, canvas.height);
-			var gaussData=gaussBlur(imgData);
+			context.drawImage(
+				img,
+				0,
+				0,
+				img.width,
+				img.height,
+				0,
+				0,
+				canvas.width,
+				canvas.height
+			);
+			var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+			var gaussData = gaussBlur(imgData);
 			context.putImageData(gaussData, 0, 0);
 			var imgSrc = canvas.toDataURL();
 
-			ele.style.backgroundImage='url('+imgSrc+')';
-		}
+			ele.style.backgroundImage = "url(" + imgSrc + ")";
+		};
 	}
 
 	root.blurImg = blurImg;

@@ -4,7 +4,7 @@ const lessTo = require("gulp-less");
 const cssZi = require("gulp-clean-css");
 // const uglifyJs = require("gulp-uglify");
 const stripDebug = require("gulp-strip-debug");
-const uglifyJs = require("gulp-uglify");
+const uglifyJs = require("gulp-uglify-es").default;
 const imageMin = require("gulp-imagemin");
 const connect = require("gulp-connect");
 

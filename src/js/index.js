@@ -10,7 +10,7 @@
         // this.play = null;
     }
     Index.prototype = {
-        init: function () { //初始化
+        init() { //初始化
             this.play = document.getElementsByClassName("play")[0];
             this.prev = document.getElementsByClassName("prev")[0];
             this.next = document.getElementsByClassName("next")[0];
@@ -22,7 +22,7 @@
             
             
         },
-        getData: function () { //请求数据
+        getData() { //请求数据
             var self = this;
             $.ajax({
                 url: "../mock/data.json",
@@ -38,7 +38,7 @@
                 }
             })
         },
-        renderPage: function (index) { //控制渲染页面以及加载音乐
+        renderPage(index) { //控制渲染页面以及加载音乐
             player.renderObj.render(this.dataList[index]);
             player.renderObj.info(this.dataList[index]);
             // player.renderObj.playList(this.dataList);
@@ -55,7 +55,7 @@
                 
             }
         },
-        audioCre: function () { //控制音乐加载播放
+        audioCre() { //控制音乐加载播放
             var self = this;
             this.play.addEventListener("touchend", function () {
                 //暂停与播放
