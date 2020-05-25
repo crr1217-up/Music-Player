@@ -21,12 +21,22 @@
                 self.currentTime = player.audio.currentTime();
                 //切歌时有时会因为网速问题不能及时得到audio.duration，因为还没加载完，所以totalTime也得隔一段时间更新一次
                 self.totalTime = player.audio.totalTime();
-                console.log("当前播放时间：",self.currentTime);
+                // console.log("当前播放时间：",self.currentTime);
                 self.curWidth = self.currentTime / self.totalTime * self.width;
-                self.controlDot.style.left = self.curWidth - 6 + "px";//进度点有一个2vw的边框
+                self.controlDot.style.transform =
+									"translate(" + self.curWidth + "px)";//进度点有一个2vw的边框,初始left值为-2vw，不能直接赋值设置其left，所以直接让他translateX
                 self.progress.style.width = self.curWidth + "px";
-                self.nowTime.innerText = "0"+Math.floor(self.currentTime/60)+":"+parseInt(self.currentTime%60)
-                console.log("总时长，总宽度：",self.totalTime,self.width);
+                let m = Math.floor(self.currentTime / 60);
+                let s = parseInt(self.currentTime % 60);
+                
+                m<10? m = "0" + m:"";
+                s < 10 ? s = "0" + s : "";
+                self.nowTime.innerText = m + ":" + s;
+                // if (player.audio.isEnd()) {
+                //     player.audio.status = "pause";
+                //     player.init.isPlay();
+                // }
+                // console.log("总时长，总宽度：",self.totalTime,self.width);
             },1000)
             
         },
@@ -42,12 +52,23 @@
         dragBar: function () { //点击跳转进度
             var self = this;
             this.left = this.total.getBoundingClientRect().left;
-            this.bar.addEventListener("touchstart", function (e) { 
+            this.bar.addEventListener("touchstart", function (e) {
+                // console.log(e)
+                self.startX = e.touches[0].clientX;
                 player.audio.audio1.currentTime =
-									((e.touches[0].clientX - self.left) / self.width) *
-									self.totalTime;
+									((self.startX - self.left) / self.width) * self.totalTime;
                 // console.log(player.audio.audio.currentTime);
-            },false);
+            }, false);
+            this.bar.addEventListener("touchmove", (e) => { 
+                // console.log(e);
+                player.audio.pause();
+                self.moveX = e.changedTouches[0].clientX;
+                player.audio.audio1.currentTime =
+									((self.moveX - self.left) / self.width) * self.totalTime;
+            })
+            this.bar.addEventListener("touchend", (e) => {
+                player.audio.play();
+            })
         }
         
     }

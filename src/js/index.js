@@ -34,7 +34,7 @@
                     self.index = self.indexCre.index;
                     self.renderPage(self.index);
                     self.audioCre();
-                    
+                    self.bar();
                 }
             })
         },
@@ -45,14 +45,22 @@
             player.renderObj.liking(this.dataList[index].isLike);
             player.audio.load(this.dataList[index].audioSrc);
             // console.log(this.audio.status);
+            this.isPlay();
+        },
+        isPlay() { 
             if (player.audio.status === "playing") {
                 player.progressBar.clearTimer();
                 // console.log("111111");
                 player.audio.play();
+                
                 this.play.className = "play playing";//改变按钮状态
                 this.rotate(0);//从0开始旋转（切歌后）
                 this.bar();//进度条开始变化
                 
+            } else if (player.audio.status === "pause") {
+                player.audio.pause();
+                this.play.className = "play";
+                clearInterval(self.timer);//停止旋转图片
             }
         },
         audioCre() { //控制音乐加载播放
@@ -91,6 +99,18 @@
             }
             this.prev.addEventListener("touchend", clickPre, false);
             this.next.addEventListener("touchend", clickNext, false);
+            //当直接点击进度条播放
+            document.getElementsByClassName("bar")[0].addEventListener("touchend", () => { 
+                self.bar();
+                if (player.audio.status = "pause") { 
+                    console.log("1111");
+                    player.audio.status = "playing";
+                    player.audio.play();
+                    self.play.className = "play playing";//改变按钮状态
+                    var deg = self.img.dataset.rotate || 0;
+                    self.rotate(deg);//接着上次旋转的角度旋转
+                };
+            });
             
         },
         rotate: function (deg) {
@@ -106,6 +126,9 @@
         bar: function () { //进度条变化以及跳转
             player.progressBar.controlPro();
             player.progressBar.dragBar();
+           
+            
+            // this.isPlay();
         },
         sonList: function () { //播放列表的点击事件以及上拉下移事件
             var self = this;
@@ -139,4 +162,5 @@
     var ind = new Index();
     ind.init();
     player.dataList = ind.dataList;
+    player.init = ind;
 })(window.Zepto, window.player || (window.player = {}))

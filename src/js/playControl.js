@@ -27,9 +27,13 @@
 			return this.audio1.currentTime;
 		},
 		totalTime: function () { 
-			console.log(this.audio1.duration);
+			
 			return this.audio1.duration;
 
+		},
+		isEnd() { 
+			console.log(this.audio1.ended);
+			return this.audio1.ended;
 		}
 	};
 

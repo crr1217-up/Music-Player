@@ -15,7 +15,10 @@
         singer.innerText = info.singer;
         zhuanji.innerText = info.album;
         var minute = Math.floor(info.duration / 60);
-        allTime.innerText = minute+":"+(info.duration - minute*60);
+        var second = info.duration - minute * 60;
+        minute < 10 ? minute = "0" + minute : "";
+        second < 10 ? second = "0" + second : "";
+        allTime.innerText = minute + ":" + second;
     }
     
     function liking(info) { //渲染是否喜欢
